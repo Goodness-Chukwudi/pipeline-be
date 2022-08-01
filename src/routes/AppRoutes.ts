@@ -1,7 +1,6 @@
-
 import { API_PATH } from "../App";
-
-
+import DeveloperController from "../controllers/DeveloperController";
+import HrController from "../controllers/HrController";
 class AppRoutes {
 
     private app;
@@ -10,8 +9,8 @@ class AppRoutes {
     }
 
     initRoutes() {
-        // this.app.use(API_PATH + "/app", );
-
+        this.app.use(API_PATH + "/developers", DeveloperController);
+        this.app.use(API_PATH + "/hr-managers", HrController);
     }
 }
 

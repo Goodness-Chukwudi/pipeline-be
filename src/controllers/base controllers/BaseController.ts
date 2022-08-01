@@ -6,7 +6,7 @@ import UserService from "../../services/UserService";
 import RequestService from "../../services/RequestService";
 import BaseResponseHandler from './BaseResponseHandler';
 import Logger from '../../common/utils/Logger';
-import { IUser } from '../../models/user/User';
+import { IUser } from '../../models/user/user';
 
 abstract class BaseAccountController extends BaseResponseHandler {
 

@@ -1,6 +1,6 @@
 import DBService from './DBService';
-import User, {IUser} from '../models/user/User';
 import { HydratedDocument } from 'mongoose';
+import User, { IUser } from '../models/user/user';
 
 class UserService extends DBService<IUser> {
 

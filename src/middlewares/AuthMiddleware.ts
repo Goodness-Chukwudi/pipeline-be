@@ -55,6 +55,7 @@ export class AuthMiddleware extends BaseRouterMiddleware {
                             return next();
 
                         } else {
+                            console.log("loginSession", loginSession)
                             throw new Error("Unable to validate user from token");
                         }
                     })

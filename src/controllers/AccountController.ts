@@ -1,10 +1,8 @@
 import BaseController from "./base controllers/BaseController";
-import { IUser } from "../models/user/User";
+import { IUser } from "../models/user/user";
 import { Response } from "express";
 import LoginSessionService from "../services/LoginSessionService";
 import { BIT, USER_STATUS } from "../common/constants/AppConstants";
-
-
 
 class AccountController extends BaseController {
 
@@ -33,6 +31,29 @@ class AccountController extends BaseController {
         this.userMiddleWare.checkUserStatus,
         this.userMiddleWare.validatePassword
         );
+        this.router.post("/login", async (req, res, next) => {
+            //logout user from other devices who's session hasn't expired yet
+            const user = this.requestService.getUser();
+            try {
+                const activeLoginSession = await this.loginSessionService.findOne({status: BIT.ON, user: user._id})
+    
+                if(activeLoginSession) {
+                    if (activeLoginSession.validity_end_date > new Date()) {
+                        activeLoginSession.logged_out = true;
+                        activeLoginSession.validity_end_date = new Date();
+                    } else {
+                        activeLoginSession.expired = true
+                    }
+                    activeLoginSession.status = BIT.OFF;
+                    await activeLoginSession.save();
+                }
+                next();
+    
+            } catch (error: any) {
+                return this.sendErrorResponse(res, error, this.errorResponseMessage.UNABLE_TO_COMPLETE_REQUEST, 500);
+    
+            }
+        });
         this.router.post("/login", (req, res) => {
             const user = this.requestService.getUser();
             this.loginUser(user, res);
@@ -77,8 +98,6 @@ class AccountController extends BaseController {
             user: user._id,
             status: BIT.ON
         };
-        //logout user from other devices who's session hasn't expired yet
-        this.logoutUser(user, res);
 
         this.loginSessionService.save(loginSessionData)
             .then(async (loginSession) => {
@@ -92,7 +111,7 @@ class AccountController extends BaseController {
                 if (user.status == USER_STATUS.PENDING || user.status == USER_STATUS.SELF_DEACTIVATED) {
                     response.message = this.successResponseMessage.ACCOUNT_ACTIVATION_REQUIRED;
                 }
-                res.status(200).json(response);
+                return res.status(200).json(response);
             })
             .catch(async (err: Error) => {
                 this.sendErrorResponse(res, err, this.errorResponseMessage.UNABLE_TO_LOGIN, 500);

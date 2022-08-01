@@ -12,9 +12,9 @@ class Cors {
         };
 
         const devCorsOptions = {
-            origin: "https://127.0.0.1:5500",
+            origin: "http://localhost:3000",
             methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"],
-            allowedHeaders: ["Date", "Content-Type", "Origin"],
+            allowedHeaders: ["Date", "Content-Type", "Origin", "Authorization"],
             credentials: true,
             optionSuccessStatus: 200,
         };

@@ -32,7 +32,7 @@ class DBService<T> {
         });
     }
 
-    public find(query:any, sort = {}, limit = 300, session: ClientSession): Promise< HydratedDocument<T>[] > {
+    public find(query:any, sort = {}, limit = 300, session = null): Promise< HydratedDocument<T>[] > {
         return new Promise((resolve, reject) => {
             this.Model.find(query)
                 .session(session)
@@ -66,7 +66,7 @@ class DBService<T> {
     }
 
 
-    public paginate(query:any, sort = {}, limit = 300, page = 1): Promise< HydratedDocument<T>[] > {
+    public paginate(query:any = {}, limit = 300, page = 1): Promise< HydratedDocument<T>[] > {
         const customLabels = {
             totalDocs: 'itemsCount',
             docs: 'data',
@@ -82,7 +82,6 @@ class DBService<T> {
         const options = {
             page: page,
             limit: limit,
-            sort: sort,
             customLabels: customLabels
         };
 
@@ -133,7 +132,7 @@ class DBService<T> {
         });
     }
 
-    public findById(id:string, session: ClientSession): Promise< HydratedDocument<T> > {
+    public findById(id:string, session = null): Promise< HydratedDocument<T> > {
         return new Promise((resolve, reject) => {
             this.Model.findById(id).session(session)
                 .then((data:any) => {

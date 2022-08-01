@@ -6,7 +6,7 @@ import { BIT } from "../common/constants/AppConstants";
 
 
 
-class LogoutController extends BaseController {
+class HrController extends BaseController {
 
     private loginSessionService: LoginSessionService;
 
@@ -27,7 +27,7 @@ class LogoutController extends BaseController {
     }
 
     logout() {
-        this.router.post("/", (req, res) => {
+        this.router.post("", (req, res) => {
             const user = this.requestService.getUser();
             this.logoutUser(user, res);
         });
@@ -55,4 +55,4 @@ class LogoutController extends BaseController {
       
     }
 }
-export default new LogoutController().router;
+export default new HrController().router;

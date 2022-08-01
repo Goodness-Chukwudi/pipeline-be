@@ -103,9 +103,15 @@ class UserMiddleware extends BaseRouterMiddleware {
 
     public ensureUniquePhone = (req:Request, res:Response, next:any) => {
         const phone = req.body.phone;
+        const confirm_password = req.body.confirm_password;
+        const password = req.body.password;
         if (!phone) {
             const error = new Error("Phone number is required");
             return this.sendErrorResponse(res, error, this.errorResponseMessage.PHONE_REQUIRED, 400);
+        }
+        if (confirm_password != password) {
+            const error = new Error("Passwords do not match");
+            return this.sendErrorResponse(res, error, this.errorResponseMessage.PASSWORD_MISSMATCH, 400);
         }
 
         this.userService.findOne({phone: phone})

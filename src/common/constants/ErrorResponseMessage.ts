@@ -120,9 +120,14 @@ class ErrorResponseMessage {
         message: "Unable to validate user from token",
     };
 
+    public PASSWORD_MISSMATCH = {
+        response_code: 25,
+        message: "Passwords do not match",
+    };
+
     public missingFieldMessage(input: unknown) {
         return {
-          response_code: 25,
+          response_code: 26,
           message: "Please provide input for " + input,
         };
       }

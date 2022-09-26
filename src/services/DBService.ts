@@ -174,7 +174,7 @@ class DBService<T> {
         });
     }
 
-    public findOneWithPopulate(query:any, session: ClientSession): Promise< HydratedDocument<T> > {
+    public findOneWithPopulate(query:any, session = null): Promise< HydratedDocument<T> > {
         return new Promise((resolve, reject) => {
             this.Model.findOne(query)
                 .populate(this.fields)

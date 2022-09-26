@@ -82,7 +82,7 @@ export const BIT = Object.freeze({
     OFF: 0
 });
 
-export const USER_PRIVILEGES = Object.freeze({
+export const USER_ROLES = Object.freeze({
     USER: 0,
     EDITOR: 1,
     ADMIN: 2,

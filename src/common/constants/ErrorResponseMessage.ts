@@ -10,9 +10,9 @@ class ErrorResponseMessage {
         message: "User not found",
     };
 
-    public INVALID_CODE = {
+    public INVALID_OTP = {
         response_code: 3,
-        message: "Invalid code",
+        message: "Invalid OTP",
     };
 
     public DUPLICATE_EMAIL = {
@@ -120,14 +120,34 @@ class ErrorResponseMessage {
         message: "Unable to validate user from token",
     };
 
-    public PASSWORD_MISSMATCH = {
+    public PASSWORD_MISMATCH = {
         response_code: 25,
         message: "Passwords do not match",
     };
 
+    public PASSWORD_UPDATE_REQUIRED = {
+        response_code: 26,
+        message: "Passwords do not match",
+    };
+
+    public INVALID_SESSION = {
+        response_code: 27,
+        message: "Invalid login session ID",
+    };
+
+    public INVALID_SESSION_USER = {
+        response_code: 28,
+        message: "Unable to validate user from login session",
+    };
+
+    public INVALID_PERMISSION = {
+        response_code: 29,
+        message: "Sorry you do not have permission to perform this action",
+    };
+
     public missingFieldMessage(input: unknown) {
         return {
-          response_code: 26,
+          response_code: 30,
           message: "Please provide input for " + input,
         };
       }

@@ -1,4 +1,6 @@
 import { API_PATH } from "../App";
+import { USER_ROLES } from "../common/constants/AppConstants";
+import UserPrivilegeMiddleware from "../middlewares/user/UserPrivilegeMiddleware";
 
 
 class AdminRoutes {
@@ -9,8 +11,10 @@ class AdminRoutes {
     }
 
     initRoutes() {
-        // const sysUserMiddleware = new SysUserMiddleware(this.app);
-        // this.app.use(API_PATH + "/admin", sysUserMiddleware.isAdmin);
+        const userPrivilegeMiddleware = new UserPrivilegeMiddleware(this.app, USER_ROLES.ADMIN);
+        this.app.use(API_PATH + "/admin", userPrivilegeMiddleware.validatePrivilege);
+
+        
 
     }
 }

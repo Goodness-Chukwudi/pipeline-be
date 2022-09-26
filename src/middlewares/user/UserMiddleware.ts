@@ -111,7 +111,7 @@ class UserMiddleware extends BaseRouterMiddleware {
         }
         if (confirm_password != password) {
             const error = new Error("Passwords do not match");
-            return this.sendErrorResponse(res, error, this.errorResponseMessage.PASSWORD_MISSMATCH, 400);
+            return this.sendErrorResponse(res, error, this.errorResponseMessage.PASSWORD_MISMATCH, 400);
         }
 
         this.userService.findOne({phone: phone})

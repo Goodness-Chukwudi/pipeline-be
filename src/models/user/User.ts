@@ -75,6 +75,7 @@ export interface IUser {
     activation_email_sent: boolean,
     address_verified: boolean,
     document_satisfied: boolean,
+    
     day_created: number,
     week_created: number,
     month_created: number,
@@ -83,7 +84,7 @@ export interface IUser {
     hour_created: number,
     am_or_pm: string,
     
-    _id: string
+    _id: Schema.Types.ObjectId
 }
 
 export const EDITABLE_FIELDS = [

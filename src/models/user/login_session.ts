@@ -21,7 +21,7 @@ const LoginSessionSchema = new Schema<ILoginSession>({
 
 export interface ILoginSession {
     uuid: string,
-    user: Schema.Types.ObjectId,
+    user: any,
     status: number,
     validity_end_date: Date,
     logged_out: boolean,
@@ -30,7 +30,7 @@ export interface ILoginSession {
     version: string,
     device: string,
     
-    _id: string
+    _id: Schema.Types.ObjectId
 }
 
 LoginSessionSchema.plugin(mongoosePaginate);
